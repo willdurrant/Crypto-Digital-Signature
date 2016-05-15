@@ -16,7 +16,7 @@ public class ExampleSMIMEVerifyRSA {
 
 	Security.addProvider(new FlexiCoreProvider());
 	
-	ClassLoader classLoader = ExampleSMIMESignRSA.class.getClassLoader();
+	ClassLoader classLoader = ExampleSMIMEVerifyRSA.class.getClassLoader();
 
 	File file = new File(classLoader.getResource("MyEmail").getFile());
 	byte[] message = new byte[(int) file.length()];
@@ -65,6 +65,10 @@ public class ExampleSMIMEVerifyRSA {
 	certCA.verify(pubKeyCA, "FlexiCore");
 	System.out.println("The signature of \"UserCA.cer\" verifies : true");
 
+	System.out.println("=> The CA Issuer's DN " + certCA.getIssuerDN());
+	
+	System.out.println("=> The CA's signiture " + certCA.toString());
+	
 	System.out.println("=> The Certificate Chain is valid!\n");
 
 	PublicKey pubKeyRSA = certRSA.getPublicKey();
